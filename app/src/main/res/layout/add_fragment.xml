@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="@dimen/abc_action_bar_content_inset_material"
+              android:weightSum="1"
+              android:background="@color/cardview_light_background">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/headerEdit"
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/header"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/descriptionEdit"
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/description"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addButton"
+        android:id="@+id/addButton"
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
+</LinearLayout>
