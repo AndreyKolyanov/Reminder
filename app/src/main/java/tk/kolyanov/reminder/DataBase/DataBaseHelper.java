@@ -19,17 +19,18 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
     static DataBaseHelper mDataBaseHelper;
 
     public static String DATABASE_NAME = "reminder.db";
-    public static int DATABASE_VERSION = 1;
+    public static int DATABASE_VERSION = 2;
     public static String DATABASE_TABLE = "remind";
 
     public static String HEADER = "header";
     public static String DESCRIPTION = "description";
+    public static String DATE_TIME = "date_time";
 
     public static String CREATE_DATABASE = "create table "
             + DATABASE_TABLE + " (" + BaseColumns._ID
             + " integer primary key autoincrement, "
             + HEADER + " text not null, " + DESCRIPTION
-            + " text not null);";
+            + " text not null, " + DATE_TIME + " integer not null);";
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -59,7 +60,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF IT EXISTS " + DATABASE_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
         onCreate(db);
     }
 
@@ -70,6 +71,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
         ContentValues values = new ContentValues();
         values.put(HEADER, object.getHeader());
         values.put(DESCRIPTION, object.getDescription());
+        values.put(DATE_TIME, object.getDateTime());
 
         db.insert(DATABASE_TABLE, null, values);
 
@@ -82,7 +84,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
         SQLiteDatabase db = getReadableDatabase();
         Remind remind = null;
 
-        String [] columns = {BaseColumns._ID, HEADER, DESCRIPTION};
+        String [] columns = {BaseColumns._ID, HEADER, DESCRIPTION, DATE_TIME};
         String [] selectionArgs = {"" + id};
         Cursor cursor = db.query(DATABASE_TABLE, columns, BaseColumns._ID + "= ?", selectionArgs,
                 null, null, null);
@@ -92,11 +94,13 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
             int idColumnIndex = cursor.getColumnIndex(BaseColumns._ID);
             int headerColumnIndex = cursor.getColumnIndex(HEADER);
             int descriptionColumnIndex = cursor.getColumnIndex(DESCRIPTION);
+            int dateTimeColumnIndex = cursor.getColumnIndex(DATE_TIME);
 
             if (cursor.moveToNext()){
                 remind = new Remind(cursor.getLong(idColumnIndex),
                         cursor.getString(headerColumnIndex),
-                        cursor.getString(descriptionColumnIndex));
+                        cursor.getString(descriptionColumnIndex),
+                        cursor.getLong(dateTimeColumnIndex));
             }
         }
 
@@ -109,7 +113,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
         SQLiteDatabase db = getReadableDatabase();
         List<Remind> list = new ArrayList<>();
 
-        String [] columns = {BaseColumns._ID, HEADER, DESCRIPTION};
+        String [] columns = {BaseColumns._ID, HEADER, DESCRIPTION, DATE_TIME};
         Cursor cursor = db.query(DATABASE_TABLE, columns, null, null, null, null, null);
 
         if (cursor.moveToFirst()){
@@ -117,11 +121,13 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
             int idColumnIndex = cursor.getColumnIndex(BaseColumns._ID);
             int headerColumnIndex = cursor.getColumnIndex(HEADER);
             int descriptionColumnIndex = cursor.getColumnIndex(DESCRIPTION);
+            int dateTimeColumnIndex = cursor.getColumnIndex(DATE_TIME);
 
             do{
                 list.add(new Remind(cursor.getLong(idColumnIndex),
                         cursor.getString(headerColumnIndex),
-                        cursor.getString(descriptionColumnIndex)));
+                        cursor.getString(descriptionColumnIndex),
+                        cursor.getLong(dateTimeColumnIndex)));
             }while (cursor.moveToNext());
         }
 

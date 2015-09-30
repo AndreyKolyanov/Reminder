@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("id", remind.getId());
                 intent.putExtra("header", remind.getHeader());
                 intent.putExtra("description", remind.getDescription());
+                intent.putExtra("datetime", remind.getDateTime());
                 startActivity(intent);
             }
         });

@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import tk.kolyanov.reminder.R;
 import tk.kolyanov.reminder.Objects.Remind;
@@ -24,6 +27,9 @@ public class RemindAdapter extends BaseAdapter {
     static class ViewHolder{
         TextView header;
         TextView description;
+        TextView day;
+        TextView month;
+        TextView time;
     }
 
     public void updateData(List<Remind> items){
@@ -48,21 +54,35 @@ public class RemindAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
+        Remind remind = getItem(position);
+
+        SimpleDateFormat dateFormatDay = new SimpleDateFormat("d", Locale.getDefault());
+        SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMM", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.reminder_list_item, parent, false);
+
             viewHolder = new ViewHolder();
             viewHolder.header = (TextView)convertView.findViewById(R.id.header);
             viewHolder.description = (TextView)convertView.findViewById(R.id.description);
+            viewHolder.day = (TextView)convertView.findViewById(R.id.miniCalendarDay);
+            viewHolder.month = (TextView)convertView.findViewById(R.id.miniCalendarMonth);
+            viewHolder.time = (TextView)convertView.findViewById(R.id.miniCalendarClock);
+
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.header.setText(getItem(position).getHeader());
-        viewHolder.description.setText(getItem(position).getDescription());
+        viewHolder.header.setText(remind.getHeader());
+        viewHolder.description.setText(remind.getDescription());
+
+        viewHolder.day.setText(dateFormatDay.format(new Date(remind.getDateTime())));
+        viewHolder.month.setText(dateFormatMonth.format(new Date(remind.getDateTime())));
+        viewHolder.time.setText(timeFormat.format(new Date(remind.getDateTime())));
 
         return convertView;
     }

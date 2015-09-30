@@ -12,5 +12,7 @@
     <string name="updateButton">Изменить</string>
     <string name="deleteButton">Удалить</string>
     <string name="title_activity_update">UpdateActivity</string>
+    <string name="time_button">Время</string>
+    <string name="date_button">Дата</string>
 
 </resources>

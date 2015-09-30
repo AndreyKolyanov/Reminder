@@ -24,6 +24,22 @@
         android:hint="@string/description"/>
 
     <Button
+        style="@style/Base.Widget.AppCompat.Toolbar.Button.Navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/time_button"
+        android:id="@+id/timeButton"
+        />
+
+    <Button
+        style="@style/Base.Widget.AppCompat.Toolbar.Button.Navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/date_button"
+        android:id="@+id/dateButton"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/addButton"

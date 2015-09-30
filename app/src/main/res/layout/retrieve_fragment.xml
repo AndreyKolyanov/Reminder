@@ -3,7 +3,9 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:weightSum="1">
+              android:weightSum="1"
+                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,7 +15,8 @@
         android:id="@+id/headerView"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/abc_action_bar_content_inset_material"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -24,17 +27,31 @@
         android:layout_weight="0.25"
         android:layout_below="@+id/headerView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:paddingBottom="@dimen/abc_action_bar_content_inset_material"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/timeView"
+        android:layout_below="@+id/descriptionView"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/abc_action_bar_content_inset_material"
+        android:paddingTop="@dimen/abc_action_bar_content_inset_material"
+        android:textSize="@dimen/abc_alert_dialog_button_bar_height"
+        android:textStyle="bold"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/updateButton"
         android:id="@+id/updateButton"
-        android:layout_below="@+id/descriptionView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
         style="@style/Base.Widget.AppCompat.Toolbar.Button.Navigation"
+        android:layout_below="@+id/dateView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/button"
         android:layout_toStartOf="@+id/button"/>
 
@@ -51,10 +68,24 @@
         android:layout_toEndOf="@+id/button"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/abc_action_bar_content_inset_material"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:layout_below="@+id/descriptionView"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/deleteButton"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible"/>
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/dateView"
+        android:layout_below="@+id/timeView"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="@dimen/abc_action_bar_content_inset_material"
+        android:paddingBottom="@dimen/abc_action_bar_content_inset_material"
+        android:textStyle="bold"
+        android:textSize="@dimen/abc_dialog_padding_material"/>
 </RelativeLayout>

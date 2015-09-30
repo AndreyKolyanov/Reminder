@@ -20,11 +20,13 @@ public class RetrieveActivity extends AppCompatActivity {
         Long id = intent.getLongExtra("id", 0);
         String header = intent.getStringExtra("header");
         String description = intent.getStringExtra("description");
+        Long dateTime = intent.getLongExtra("datetime", 0);
 
         Bundle args = new Bundle();
         args.putLong("id", id);
         args.putString("header", header);
         args.putString("description", description);
+        args.putLong("datetime", dateTime);
         
         Fragment retrieve = new RetrieveFragment();
         retrieve.setArguments(args);
