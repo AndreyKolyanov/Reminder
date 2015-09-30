@@ -7,5 +7,10 @@
     <string name="header">Заголовок</string>
     <string name="description">Описнаие</string>
     <string name="addButton">Добавить</string>
+    <string name="title_activity_retrive">Reminder</string>
+
+    <string name="updateButton">Изменить</string>
+    <string name="deleteButton">Удалить</string>
+    <string name="title_activity_update">UpdateActivity</string>
 
 </resources>

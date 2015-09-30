@@ -1,13 +1,24 @@
-package tk.kolyanov.reminder;
+package tk.kolyanov.reminder.Objects;
 
 
 public class Remind {
+    private Long mId;
     private String mHeader;
     private String mDescription;
 
-    Remind(String header, String description){
+    public Remind(String header, String description){
         mHeader = header;
         mDescription = description;
+    }
+
+    public Remind(Long id, String header, String description){
+        mId = id;
+        mHeader = header;
+        mDescription = description;
+    }
+
+    public Long getId() {
+        return mId;
     }
 
     public String getHeader() {

@@ -1,4 +1,4 @@
-package tk.kolyanov.reminder;
+package tk.kolyanov.reminder.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,13 +7,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import tk.kolyanov.reminder.R;
+import tk.kolyanov.reminder.Objects.Remind;
 
 public class RemindAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<Remind> mItems;
+    private List<Remind> mItems;
 
-    RemindAdapter(Context c, ArrayList<Remind> items){
+    public RemindAdapter(Context c, List<Remind> items){
         mContext = c;
         mItems = items;
     }
@@ -21,6 +24,10 @@ public class RemindAdapter extends BaseAdapter {
     static class ViewHolder{
         TextView header;
         TextView description;
+    }
+
+    public void updateData(List<Remind> items){
+        mItems = items;
     }
 
     @Override
