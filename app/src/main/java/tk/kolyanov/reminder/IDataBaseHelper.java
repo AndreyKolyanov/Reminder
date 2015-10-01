@@ -1,9 +1,7 @@
-package tk.kolyanov.reminder.DataBase;
+package tk.kolyanov.reminder;
 
 
 import java.util.List;
-
-import tk.kolyanov.reminder.Objects.Remind;
 
 public interface IDataBaseHelper {
 

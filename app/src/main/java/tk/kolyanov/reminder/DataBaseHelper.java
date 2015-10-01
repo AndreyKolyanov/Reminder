@@ -1,4 +1,4 @@
-package tk.kolyanov.reminder.DataBase;
+package tk.kolyanov.reminder;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,8 +10,6 @@ import android.provider.BaseColumns;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import tk.kolyanov.reminder.Objects.Remind;
 
 
 public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDataBaseHelper{

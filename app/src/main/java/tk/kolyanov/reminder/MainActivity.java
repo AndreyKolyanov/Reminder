@@ -1,6 +1,7 @@
-package tk.kolyanov.reminder.Retrieve;
+package tk.kolyanov.reminder;
 
-import android.content.Intent;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,25 +11,14 @@ import android.widget.ListView;
 
 import com.melnykov.fab.FloatingActionButton;
 
-import java.util.List;
+public class MainActivity extends AppCompatActivity implements StartDialog {
 
-import tk.kolyanov.reminder.Create.AddActivity;
-import tk.kolyanov.reminder.DataBase.DataBaseHelper;
-import tk.kolyanov.reminder.R;
-import tk.kolyanov.reminder.Objects.Remind;
-import tk.kolyanov.reminder.Adapters.RemindAdapter;
-
-public class MainActivity extends AppCompatActivity {
-
-    DataBaseHelper mDataBaseHelper;
     RemindAdapter mRemindAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mDataBaseHelper = DataBaseHelper.getInstance(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.view);
         if (toolbar != null){
@@ -40,12 +30,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Remind remind = mRemindAdapter.getItem(position);
-                Intent intent = new Intent(MainActivity.this, RetrieveActivity.class);
-                intent.putExtra("id", remind.getId());
-                intent.putExtra("header", remind.getHeader());
-                intent.putExtra("description", remind.getDescription());
-                intent.putExtra("datetime", remind.getDateTime());
-                startActivity(intent);
+                RetrieveDialog retrieveDialog = (RetrieveDialog) RetrieveDialog.newInstance(remind);
+                startDialog(retrieveDialog, "retrieve");
             }
         });
 
@@ -56,25 +42,28 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
+                AddDialog addDialog = new AddDialog();
+                startDialog(addDialog, "add");
             }
         });
 
-        mRemindAdapter = new RemindAdapter(this, getData());
+        mRemindAdapter = new RemindAdapter(this);
         listView.setAdapter(mRemindAdapter);
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        mRemindAdapter.updateData(getData());
+    }
+
+    @Override
+    public void startDialog(DialogFragment fragment, String tag) {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragment.show(fragmentManager, tag);
+    }
+
+    @Override
+    public void noyifyAdapter() {
         mRemindAdapter.notifyDataSetChanged();
     }
-
-    public List<Remind> getData(){
-        return mDataBaseHelper.getAllElements();
-    }
-
-
 }

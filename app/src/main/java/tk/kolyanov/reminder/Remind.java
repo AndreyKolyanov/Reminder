@@ -1,4 +1,4 @@
-package tk.kolyanov.reminder.Objects;
+package tk.kolyanov.reminder;
 
 
 import java.util.Calendar;

@@ -8,25 +8,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Retrieve.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".Create.AddActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".Retrieve.RetrieveActivity"
-            android:label="@string/title_activity_retrive" >
-        </activity>
-        <activity
-            android:name=".Update.UpdateActivity"
-            android:label="@string/title_activity_update" >
         </activity>
     </application>
 
