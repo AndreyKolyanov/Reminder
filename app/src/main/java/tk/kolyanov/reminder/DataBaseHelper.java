@@ -63,7 +63,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
     }
 
     @Override
-    public void add(Remind object) {
+    public long add(Remind object) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -71,10 +71,11 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
         values.put(DESCRIPTION, object.getDescription());
         values.put(DATE_TIME, object.getDateTime());
 
-        db.insert(DATABASE_TABLE, null, values);
+        long id = db.insert(DATABASE_TABLE, null, values);
 
         db.close();
 
+        return id;
     }
 
     @Override
@@ -112,7 +113,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements BaseColumns, IDa
         List<Remind> list = new ArrayList<>();
 
         String [] columns = {BaseColumns._ID, HEADER, DESCRIPTION, DATE_TIME};
-        Cursor cursor = db.query(DATABASE_TABLE, columns, null, null, null, null, null);
+        Cursor cursor = db.query(DATABASE_TABLE, columns, null, null, null, null, DATE_TIME);
 
         if (cursor.moveToFirst()){
 

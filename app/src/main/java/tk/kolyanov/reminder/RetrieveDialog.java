@@ -59,7 +59,7 @@ public class RetrieveDialog extends DialogFragment {
         TextView date = (TextView)view.findViewById(R.id.dateView);
         date.setText(dateFormat.format(new Date(args.getLong("datetime", 0))));
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme)
                 .setView(view)
                 .setPositiveButton(android.R.string.ok, null)
                 .create();

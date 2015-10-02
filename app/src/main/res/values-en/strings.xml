@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Reminder</string>
+    <string name="addButton">Add</string>
+    <string name="date_button">Date</string>
+    <string name="deleteButton">Remove</string>
+    <string name="description">Description</string>
+    <string name="header">Header</string>
+    <string name="time_button">Time</string>
+    <string name="updateButton">Update</string>
+</resources>

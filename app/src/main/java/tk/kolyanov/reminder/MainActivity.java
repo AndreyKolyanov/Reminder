@@ -2,6 +2,7 @@ package tk.kolyanov.reminder;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,10 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 
 public class MainActivity extends AppCompatActivity implements StartDialog {
 
     RemindAdapter mRemindAdapter;
+    ScaleInAnimationAdapter mAnimationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements StartDialog {
             }
         });
 
-       FloatingActionButton addButton = (FloatingActionButton)findViewById(R.id.fab);
+        FloatingActionButton addButton = (FloatingActionButton)findViewById(R.id.fab);
 
         addButton.attachToListView(listView);
 
@@ -48,7 +51,9 @@ public class MainActivity extends AppCompatActivity implements StartDialog {
         });
 
         mRemindAdapter = new RemindAdapter(this);
-        listView.setAdapter(mRemindAdapter);
+        mAnimationAdapter = new ScaleInAnimationAdapter(mRemindAdapter);
+        mAnimationAdapter.setAbsListView(listView);
+        listView.setAdapter(mAnimationAdapter);
     }
 
     @Override
@@ -65,5 +70,6 @@ public class MainActivity extends AppCompatActivity implements StartDialog {
     @Override
     public void noyifyAdapter() {
         mRemindAdapter.notifyDataSetChanged();
+        mAnimationAdapter.notifyDataSetChanged();
     }
 }

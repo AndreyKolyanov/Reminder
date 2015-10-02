@@ -60,7 +60,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="01"
                         android:id="@+id/miniCalendarDay"
                         android:maxLength="@integer/snackbar_text_max_lines"
                         android:textSize="@dimen/abc_dialog_padding_material"
@@ -71,7 +70,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Small Text"
                         android:id="@+id/miniCalendarMonth"
                         android:maxLength="@integer/month_name_length"
                         android:layout_gravity="center_horizontal"/>
@@ -80,7 +78,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="Small Text"
                         android:id="@+id/miniCalendarClock"
                         android:maxLength="@integer/time_length"
                         android:textColor="@color/primary_text"
@@ -90,9 +87,8 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/abc_action_bar_stacked_max_height"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
                     android:id="@+id/description"
                     android:layout_marginTop="36dp"
                     android:layout_alignParentTop="true"
@@ -105,7 +101,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Large Text"
                     android:id="@+id/header"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"

@@ -1,10 +1,14 @@
 package tk.kolyanov.reminder;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +32,7 @@ public class UpdateDialog extends DialogFragment {
     public static String TIME_PATTERN = "HH:mm";
     Remind mRemind;
     StartDialog mStartDialog;
+    AlarmManager mAlarmManager;
 
     public static Fragment newInstance(Remind remind){
 
@@ -104,18 +109,42 @@ public class UpdateDialog extends DialogFragment {
             }
         });
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme)
                 .setTitle(R.string.updateButton)
                 .setView(view)
                 .setPositiveButton(R.string.updateButton, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        mAlarmManager = (AlarmManager)getActivity()
+                                .getSystemService(Context.ALARM_SERVICE);
+
+                        Intent intent = new Intent(getActivity(), RemindReceiver.class);
+                        intent.putExtra("header", mRemind.getHeader());
+                        intent.putExtra("description", mRemind.getDescription());
+                        intent.putExtra("id", mRemind.getId());
+
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0,
+                                intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                        mAlarmManager.cancel(pendingIntent);
+
                         mRemind.setHeader(headerEdit.getText().toString());
                         mRemind.setDescription(descriptionEdit.getText().toString());
                         mRemind.setDateTime(mCalendar.getTime().getTime());
                         DataBaseHelper mDataBaseHelper = DataBaseHelper.getInstance(getActivity());
                         mDataBaseHelper.update(mRemind);
                         mStartDialog.noyifyAdapter();
+
+                        Intent newIntent = new Intent(getActivity(), RemindReceiver.class);
+                        newIntent.putExtra("header", mRemind.getHeader());
+                        newIntent.putExtra("description", mRemind.getDescription());
+                        newIntent.putExtra("id", mRemind.getId());
+
+                        PendingIntent newPendingIntent = PendingIntent.getBroadcast(getActivity(), 0,
+                                newIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+                        mAlarmManager.set(AlarmManager.RTC_WAKEUP, mRemind.getDateTime(),
+                                newPendingIntent);
                     }
                 })
                 .create();

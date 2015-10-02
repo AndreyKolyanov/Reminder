@@ -1,58 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:weightSum="1"
-                android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
-                android:paddingRight="@dimen/abc_action_bar_content_inset_material">
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:weightSum="1"
+                    android:paddingLeft="@dimen/abc_action_bar_content_inset_material"
+                    android:paddingRight="@dimen/abc_action_bar_content_inset_material">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/headerView"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="@dimen/abc_action_bar_content_inset_material"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/headerView"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="@dimen/abc_action_bar_content_inset_material"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/descriptionView"
-        android:layout_weight="0.25"
-        android:layout_below="@+id/headerView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingBottom="@dimen/abc_action_bar_content_inset_material"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/descriptionView"
+            android:layout_weight="0.25"
+            android:layout_below="@+id/headerView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingBottom="@dimen/abc_action_bar_content_inset_material"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/timeView"
-        android:layout_below="@+id/descriptionView"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="@dimen/abc_action_bar_content_inset_material"
-        android:paddingTop="@dimen/abc_action_bar_content_inset_material"
-        android:textSize="@dimen/abc_alert_dialog_button_bar_height"
-        android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/timeView"
+            android:layout_below="@+id/descriptionView"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="@dimen/abc_action_bar_content_inset_material"
+            android:paddingTop="@dimen/abc_action_bar_content_inset_material"
+            android:textSize="@dimen/abc_alert_dialog_button_bar_height"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/dateView"
-        android:layout_below="@+id/timeView"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="@dimen/abc_action_bar_content_inset_material"
-        android:paddingBottom="@dimen/abc_action_bar_content_inset_material"
-        android:textStyle="bold"
-        android:textSize="@dimen/abc_dialog_padding_material"/>
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/dateView"
+            android:layout_below="@+id/timeView"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="@dimen/abc_action_bar_content_inset_material"
+            android:paddingBottom="@dimen/abc_action_bar_content_inset_material"
+            android:textStyle="bold"
+            android:textSize="@dimen/abc_dialog_padding_material"/>
+    </RelativeLayout>
+    </ScrollView>

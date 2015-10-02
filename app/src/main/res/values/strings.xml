@@ -1,17 +1,13 @@
 <resources>
-    <string name="app_name">Reminder</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name" translatable="false">Reminder</string>
 
     <string name="header">Заголовок</string>
     <string name="description">Описнаие</string>
-    <string name="addButton">Добавить</string>
-    <string name="title_activity_retrive">Reminder</string>
 
+    <string name="addButton">Добавить</string>
     <string name="updateButton">Изменить</string>
     <string name="deleteButton">Удалить</string>
-    <string name="title_activity_update">UpdateActivity</string>
+
     <string name="time_button">Время</string>
     <string name="date_button">Дата</string>
 

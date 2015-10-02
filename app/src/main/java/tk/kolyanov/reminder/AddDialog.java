@@ -1,9 +1,13 @@
 package tk.kolyanov.reminder;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +30,7 @@ public class AddDialog extends DialogFragment {
     SimpleDateFormat timeFormat;
     public static String TIME_PATTERN = "HH:mm";
     StartDialog mStartDialog;
+    AlarmManager mAlarmManager;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -64,19 +69,19 @@ public class AddDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
-                                                 @Override
-                                                 public void onDateSet(DatePickerDialog datePickerDialog, int year,
-                                                                       int monthOfYear, int dayOfMonth) {
-                                                     mCalendar.set(year, monthOfYear, dayOfMonth);
-                                                     dateButton.setText(dateFormat.format(mCalendar.getTime()));
-                                                 }
-                                             }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
+                     @Override
+                     public void onDateSet(DatePickerDialog datePickerDialog, int year,
+                                           int monthOfYear, int dayOfMonth) {
+                         mCalendar.set(year, monthOfYear, dayOfMonth);
+                         dateButton.setText(dateFormat.format(mCalendar.getTime()));
+                     }
+                }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
                         mCalendar.get(Calendar.DAY_OF_MONTH))
                         .show(getFragmentManager(), "datePicker");
             }
         });
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme)
                 .setTitle(R.string.addButton)
                 .setView(view)
                 .setPositiveButton(R.string.addButton, new DialogInterface.OnClickListener() {
@@ -85,8 +90,20 @@ public class AddDialog extends DialogFragment {
                         Remind remind = new Remind(headerEdit.getText().toString(),
                                 descriptionEdit.getText().toString(), mCalendar);
                         DataBaseHelper mDataBaseHelper = DataBaseHelper.getInstance(getActivity());
-                        mDataBaseHelper.add(remind);
+                        long id = mDataBaseHelper.add(remind);
                         mStartDialog.noyifyAdapter();
+                        mAlarmManager = (AlarmManager)getActivity()
+                                .getSystemService(Context.ALARM_SERVICE);
+
+                        Intent intent = new Intent(getActivity(), RemindReceiver.class);
+                        intent.putExtra("header", remind.getHeader());
+                        intent.putExtra("description", remind.getDescription());
+                        intent.putExtra("id", id);
+
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 0,
+                                intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                        mAlarmManager.set(AlarmManager.RTC_WAKEUP, remind.getDateTime(),
+                                pendingIntent);
                     }
                 })
                 .create();
