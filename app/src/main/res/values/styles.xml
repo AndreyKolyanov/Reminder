@@ -5,7 +5,9 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:textColorPrimary">@color/icons</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="toolbarStyle">@style/MyToolbar</item>
     </style>
 
     <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog">
@@ -14,14 +16,20 @@
         <item name="android:width">@dimen/dialog_fixed_width_minor</item>
         <item name="android:textColorSecondary">@color/secondary_text</item>
         <item name="android:textColorPrimary">@color/primary_text</item>
-        <item name="android:textColor">@color/primary_text</item>
-
-
     </style>
 
     <style name="MyAnimation.Window" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/abc_slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/abc_slide_out_top</item>
+    </style>
+
+    <style name="MyToolbar" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/MyTitle</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <style name="MyTitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@color/icons</item>
     </style>
 
 </resources>

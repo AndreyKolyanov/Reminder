@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements StartDialog {
             setSupportActionBar(toolbar);
         }
 
+
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
